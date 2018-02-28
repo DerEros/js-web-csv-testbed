@@ -1,0 +1,23 @@
+{
+  "name": "js-web-csv-testbed",
+  "version": "0.0.1",
+  "description": "A small project that works as test bed for different approaches to load and display CSV data in the browser",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DerEros/js-web-csv-testbed.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/DerEros/js-web-csv-testbed/issues"
+  },
+  "homepage": "https://github.com/DerEros/js-web-csv-testbed#readme",
+  "devDependencies": {
+    "webpack": "^4.0.1"
+  }
+}
