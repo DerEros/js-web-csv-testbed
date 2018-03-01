@@ -23,7 +23,7 @@ function handleDataFailed(status) {
 
 function renderData(fields, data) {
     $.each(data, function(idx, row) {
-        console.log("Row:", row);
+        $("#foo").append(idx + 1 + ". Row: " + row + "<br>");
     });
 }
 

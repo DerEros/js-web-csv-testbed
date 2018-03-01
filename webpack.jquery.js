@@ -6,7 +6,11 @@ module.exports = {
     entry: "./src/jquery/csvloader.js",
     output: {
         filename: "bundle.js",
-        path: path.resolve(__dirname, "dist/jquery")
+        path: path.resolve(__dirname, "dist/jquery"),
+        publicPath: "/dist/jquery/"
+    },
+    devServer: {
+        publicPath: "/dist/jquery/"
     },
     module: {
         rules: [
