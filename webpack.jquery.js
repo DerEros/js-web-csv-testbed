@@ -3,7 +3,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
     mode: "development",
-    entry: "./src/jquery/csvloader.js",
+    entry: "./src/jquery/app.js",
     output: {
         filename: "bundle.js",
         path: path.resolve(__dirname, "dist/jquery"),
