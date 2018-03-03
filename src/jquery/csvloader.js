@@ -1,4 +1,7 @@
+import "./sass/style.sass";
+
 var $ = require("jquery");
+var _ = require("lodash");
 var papa = require("papaparse");
 
 function app() {
@@ -23,7 +26,7 @@ function handleDataFailed(status) {
 
 function renderData(fields, data) {
     $.each(data, function(idx, row) {
-        $("#foo").append(idx + 1 + ". Row: " + row + "<br>");
+        $("#foo").append(idx + 1 + ". " + row.name + " (" + row.size + ")" + "<br>");
     });
 }
 
