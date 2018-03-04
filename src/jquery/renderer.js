@@ -22,23 +22,29 @@ export default {
         $("#data-output").text("Hello World!");
     },
 
-    renderList: function(data) {
+    renderList: function(data, sortHandlers) {
         this.resetOutput();
 
         var fields = data.fields;
         var objects = data.data;
 
-        var table = $("<table></table>");
-        table.append(this.renderHeader(fields));
+        var table = $("<table></table>", { "class": "output-table" });
+        table.append(this.renderHeader(fields, sortHandlers));
         table.append(this.renderBody(objects, fields));
 
         this.appendToOutput(table);
     },
 
-    renderHeader: function(fieldNames) {
-        var headerContainer = $("<thead></thead>");
+    renderHeader: function(fieldNames, sortHandlers) {
+        var headerContainer = $("<thead></thead>", { "class": "output-table-head" });
         $.each(fieldNames, function(idx, name){
-            headerContainer.append($("<th>" + name + "</th>"));
+            var attributes = {
+                "class": "output-table-head-column",
+                on: {
+                    click: function() { console.log("foo", name); }
+                }
+            }
+            headerContainer.append($("<th></th>", attributes).text(name));
         });
 
         return headerContainer;
@@ -46,7 +52,7 @@ export default {
 
     renderBody: function(rows, columns) {
         var self = this;
-        var bodyContainer = $("<tbody></tbody>");
+        var bodyContainer = $("<tbody></tbody>", { "class": "output-table-body" });
         $.each(rows, function(idx, row) {
             bodyContainer.append(self.renderRow(row, columns));
         });
@@ -55,10 +61,10 @@ export default {
     },
 
     renderRow: function(row, columns) {
-        var rowContainer = $("<tr></tr>");
+        var rowContainer = $("<tr></tr>", { "class": "output-table-row" });
         $.each(columns, function(idx, columnName) {
             var columnValue = row[columnName];
-            rowContainer.append("<td>" + columnValue + "</td>");
+            rowContainer.append($("<td></td>", { "class": "output-table-field" }).text(columnValue));
         });
 
         return rowContainer;
