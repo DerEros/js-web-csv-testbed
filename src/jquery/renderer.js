@@ -29,13 +29,13 @@ export default {
         var objects = dataModel.getItems();
 
         var table = $("<table></table>", { "class": "output-table" });
-        table.append(this.renderHeader(fields, columnClickHandlers));
+        table.append(this.renderHeader(fields, columnClickHandlers, dataModel.getSortedColumnName()));
         table.append(this.renderBody(objects, fields));
 
         this.appendToOutput(table);
     },
 
-    renderHeader: function(fieldNames, columnClickHandlers) {
+    renderHeader: function(fieldNames, columnClickHandlers, sortedByColumn) {
         var headerContainer = $("<thead></thead>", { "class": "output-table-head" });
         $.each(fieldNames, function(idx, name){
             var attributes = {
@@ -44,6 +44,11 @@ export default {
                     click: columnClickHandlers[name]
                 }
             }
+
+            if (name == sortedByColumn) {
+                attributes.class += " output-table-head-column-sorted";
+            }
+        
             headerContainer.append($("<th></th>", attributes).text(name));
         });
 

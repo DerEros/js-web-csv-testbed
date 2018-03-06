@@ -43,7 +43,11 @@ export default {
 
             getItems: function() { 
                 return sortItems(items, this.sortByField);
-            }
+            },
+
+            getSortedColumnName: function() { return this.sortByField.fieldName; },
+
+            getSortedColumnDirection: function() { return this.sortByField.direction; }
         }
     },
 }
