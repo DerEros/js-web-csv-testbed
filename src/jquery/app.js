@@ -2,9 +2,11 @@ var $ = require("jquery");
 
 import loader from "./csvloader.js";
 import renderer from "./renderer.js";
+import datamodel from "./datamodel.js";
 
 var data = null;
 var columnClickHandlers = null;
+var dm = null;
 
 function fetchData(url) {
     return loader.getData(url);
@@ -15,9 +17,9 @@ function renderWhenReady(dataPromise) {
 }
 
 function handleData(result) {
-    data = result;
+    dm = datamodel.create(result.fields, result.data);
     columnClickHandlers = _.reduce(result.fields, addToHandlers, {});
-    renderer.renderList(result, columnClickHandlers);
+    renderer.renderList(dm, columnClickHandlers);
 }
 
 function addToHandlers(handlers, fieldName) {
@@ -27,16 +29,9 @@ function addToHandlers(handlers, fieldName) {
 
 function createClickHandler(fieldName) {
     return function() {
-        console.log("Sorting by", fieldName);
-        sortDataBy(data, fieldName);
+        dm.setSortBy(fieldName);
+        renderer.renderList(dm, columnClickHandlers);
     }
-}
-
-function sortDataBy(data, fieldName) {
-    var sortedData = _.sortBy(data.data, [fieldName]);
-    data.data = sortedData;
-
-    renderer.renderList(data, columnClickHandlers);
 }
 
 function renderError(result) {

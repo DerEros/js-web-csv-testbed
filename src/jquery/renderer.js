@@ -22,11 +22,11 @@ export default {
         $("#data-output").text("Hello World!");
     },
 
-    renderList: function(data, columnClickHandlers) {
+    renderList: function(dataModel, columnClickHandlers) {
         this.resetOutput();
 
-        var fields = data.fields;
-        var objects = data.data;
+        var fields = dataModel.getFieldNames();
+        var objects = dataModel.getItems();
 
         var table = $("<table></table>", { "class": "output-table" });
         table.append(this.renderHeader(fields, columnClickHandlers));
