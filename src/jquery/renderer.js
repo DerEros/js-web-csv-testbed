@@ -22,26 +22,26 @@ export default {
         $("#data-output").text("Hello World!");
     },
 
-    renderList: function(data, sortHandlers) {
+    renderList: function(data, columnClickHandlers) {
         this.resetOutput();
 
         var fields = data.fields;
         var objects = data.data;
 
         var table = $("<table></table>", { "class": "output-table" });
-        table.append(this.renderHeader(fields, sortHandlers));
+        table.append(this.renderHeader(fields, columnClickHandlers));
         table.append(this.renderBody(objects, fields));
 
         this.appendToOutput(table);
     },
 
-    renderHeader: function(fieldNames, sortHandlers) {
+    renderHeader: function(fieldNames, columnClickHandlers) {
         var headerContainer = $("<thead></thead>", { "class": "output-table-head" });
         $.each(fieldNames, function(idx, name){
             var attributes = {
                 "class": "output-table-head-column",
                 on: {
-                    click: function() { console.log("foo", name); }
+                    click: columnClickHandlers[name]
                 }
             }
             headerContainer.append($("<th></th>", attributes).text(name));
