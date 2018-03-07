@@ -1,4 +1,7 @@
-id,name,size
-1,foo,434
-2,bar,4636
-3,baz,86633462
+id,name,size,group
+1,foo,434,up
+2,bar,4636,down
+3,baz,86633462,left
+4,bumm,124,up
+5,beep,643,up
+6,fumpp,125236,down

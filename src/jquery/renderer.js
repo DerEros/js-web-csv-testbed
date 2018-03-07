@@ -18,13 +18,20 @@ export default {
         getOutput().html("");
     },
 
-    renderGrouped: function(data, byField) {
-        $("#data-output").text("Hello World!");
+    renderGrouped: function(groupModel, columnClickHandlers) {
+        var self = this;
+        this.resetOutput();
+
+        var groups = groupModel.getGroups();
+        $.each(groups, function(groupName, dataModel) {
+            var header = $("<h2></h2>", { "class": "group-header" }).text(groupName);
+            self.appendToOutput(header);
+
+            self.renderList(groups[groupName], columnClickHandlers);
+        });
     },
 
     renderList: function(dataModel, columnClickHandlers) {
-        this.resetOutput();
-
         var fields = dataModel.getFieldNames();
         var objects = dataModel.getItems();
 

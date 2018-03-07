@@ -3,10 +3,12 @@ var $ = require("jquery");
 import loader from "./csvloader.js";
 import renderer from "./renderer.js";
 import datamodel from "./datamodel.js";
+import groupmodel from "./groupmodel.js";
 
 var data = null;
 var columnClickHandlers = null;
 var dm = null;
+var gm = null;
 
 function fetchData(url) {
     return loader.getData(url);
@@ -17,9 +19,10 @@ function renderWhenReady(dataPromise) {
 }
 
 function handleData(result) {
-    dm = datamodel.create(result.fields, result.data);
+    gm = groupmodel.create(result.fields, result.data);
     columnClickHandlers = _.reduce(result.fields, addToHandlers, {});
-    renderer.renderList(dm, columnClickHandlers);
+    //gm.setGroupBy("group");
+    renderer.renderGrouped(gm, columnClickHandlers);
 }
 
 function addToHandlers(handlers, fieldName) {
